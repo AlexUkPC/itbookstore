@@ -1,0 +1,6 @@
+Dear <%= @order.name %>
+Thank you for yout recent order from IT Bookstore.
+<%= @greeting %>, find me in app/views/order_mailer/received.text.erb
+You ordered the following items:
+<%= render @order.line_items %>
+We'll send you a separate email when your order ships.

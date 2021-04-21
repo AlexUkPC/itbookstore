@@ -1,0 +1,67 @@
+ro:
+  layouts:
+    application:
+      title: "Libraria IT"
+      home: "Acasa"
+      questions: "Intrebari"
+      news: "Stiri"
+      contact: "Contact"
+  store:
+    index:
+      title_html: "Catalogul Librariei IT"
+      add_html: "Adauga in cos"
+  carts:
+    cart:
+      title: "Cosul de cumparaturi"
+      empty: "Goleste cos"
+      checkout: "Plateste"
+  number:
+    currency:
+      format:
+        unit: "$"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format: "%n%u"
+  orders:
+    new:
+      legend: "Te rugam sa introduci datele tale"
+    form:
+      name: "Nume"
+      address_html: "Adresa"
+      email: "E-mail"
+      pay_type: "Platesc cu"
+      pay_prompt_html: "Selecteaza o metoda de plata"
+      submit: "Plaseaza comanda"
+      pay_types:
+        check: "Cec"
+        credit_card: "Card de credit "
+        purchase_order: "Ordin de plata"
+      check_pay_type:
+        routing_number: "Numar cec"
+        account_number: "Numar cont"
+      credit_card_pay_type:
+        cc_number: "Numar card"
+        expiration_date: "Expira"
+      purchase_order_pay_type:
+        po_number: "Numar OP"
+  errors:
+    template:
+      body: "Va rugam remediati urmatoarele erori:"
+      header:
+        one: "O eroare te impiedica sa trimiti aceasta comanda"
+        other: "%{count} erori impiedica trimiterea acestei comenzi"
+  activerecord:
+    errors:
+      messages:
+        inclusion: "nu este inclusa in lista"
+        blank: "nu poate fi gol"
+    models:
+      order: "comanda"
+    attributes:
+      order:
+        address: "Adresa"
+        name: "Numele"
+        email: "E-mail-ul"
+        pay_type: "Forma de plata"
+  thanks: "Va multumim pentru comanda"

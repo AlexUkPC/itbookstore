@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get :who_bought, on: :member
   end
 
+  resources :support_requests, only: [:index, :update]
   
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "\letter_opener"

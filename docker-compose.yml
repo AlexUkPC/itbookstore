@@ -1,0 +1,47 @@
+version: "3"
+services:
+  web_itbookstore:
+    build:
+      context: .
+      args:
+        USER_ID: "${USER_ID:-1000}"
+        GROUP_ID: "${GROUP_ID:-1000}"
+    ports:
+      - "3017:3000"
+    volumes: 
+      - ./itbookstore:/opt/app
+      - gem_cache_itbookstore:/gems
+    env_file: 
+      - .env/development/database_itbookstore
+      - .env/development/web_itbookstore
+    environment: 
+      - WEBPACKER_DEV_SERVER_HOST=webpack_dev_server_itbookstore
+  webpack_dev_server_itbookstore:
+    build:
+      context: .
+      args:
+        USER_ID: "${USER_ID:-1000}"
+        GROUP_ID: "${GROUP_ID:-1000}"
+    command: ./bin/webpack-dev-server
+    ports: 
+      - "3052:3052"
+    volumes: 
+      - ./itbookstore:/opt/app
+      - gem_cache_itbookstore:/gems
+    env_file: 
+      - .env/development/database_itbookstore
+      - .env/development/web_itbookstore
+    environment: 
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+  database_itbookstore:
+    image: postgres
+    env_file: 
+      - .env/development/database_itbookstore
+    volumes: 
+      - db_data_itbookstore:/var/lib/postgresql/data
+  redis_itbookstore:
+    image: redis
+
+volumes: 
+  db_data_itbookstore:
+  gem_cache_itbookstore:

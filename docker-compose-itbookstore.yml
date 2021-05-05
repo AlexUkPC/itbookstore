@@ -1,0 +1,35 @@
+version: "3" 
+services:
+  web_itbookstore:
+    image: alexrogna/itbookstore_web:prod
+    expose:
+      - 3000
+    env_file:
+      - .env/production/database_itbookstore
+      - .env/production/web_itbookstore
+    environment:
+      - VIRTUAL_HOST=itbookstore.alexrogna.com
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=itbookstore.alexrogna.com
+    restart: always
+
+  database_itbookstore:
+    image: postgres
+    env_file:
+      - .env/production/database_itbookstore
+    volumes:
+      - db_data_itbookstore:/var/lib/postgresql/data
+    restart: always
+    
+  db-migrator_itbookstore:
+    image: alexrogna/itbookstore_web:prod
+    command: ["./wait-for", "--timeout=300", "database_itbookstore:5432", "--", "bin/rails", "db:create" , "db:migrate"]
+    env_file:
+      - .env/production/database_itbookstore
+      - .env/production/web_itbookstore
+  redis_itbookstore:
+    image: redis
+    restart: always
+
+volumes:
+  db_data_itbookstore:

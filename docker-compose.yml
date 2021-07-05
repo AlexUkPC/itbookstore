@@ -16,6 +16,8 @@ services:
       - .env/development/web_itbookstore
     environment: 
       - WEBPACKER_DEV_SERVER_HOST=webpack_dev_server_itbookstore
+    networks:
+      - network
   webpack_dev_server_itbookstore:
     build:
       context: .
@@ -33,15 +35,23 @@ services:
       - .env/development/web_itbookstore
     environment: 
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+    networks:
+      - network
   database_itbookstore:
     image: postgres
     env_file: 
       - .env/development/database_itbookstore
     volumes: 
       - db_data_itbookstore:/var/lib/postgresql/data
+    networks:
+      - network
   redis_itbookstore:
     image: redis
+    networks:
+      - network
 
 volumes: 
   db_data_itbookstore:
   gem_cache_itbookstore:
+networks:
+  network:

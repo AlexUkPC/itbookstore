@@ -11,6 +11,8 @@ services:
       - VIRTUAL_HOST=itbookstore.alexrogna.com
       - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=itbookstore.alexrogna.com
+    networks:
+      - proxy
     restart: always
 
   database_itbookstore:
@@ -19,6 +21,8 @@ services:
       - .env/production/database_itbookstore
     volumes:
       - db_data_itbookstore:/var/lib/postgresql/data
+    networks:
+      - proxy
     restart: always
     
   db-migrator_itbookstore:
@@ -27,9 +31,15 @@ services:
     env_file:
       - .env/production/database_itbookstore
       - .env/production/web_itbookstore
+    networks:
+      - proxy
   redis_itbookstore:
     image: redis
+    networks:
+      - proxy
     restart: always
 
 volumes:
   db_data_itbookstore:
+networks:
+  proxy:

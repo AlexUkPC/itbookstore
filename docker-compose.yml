@@ -7,7 +7,7 @@ services:
         USER_ID: "${USER_ID:-1000}"
         GROUP_ID: "${GROUP_ID:-1000}"
     ports:
-      - "3017:3000"
+      - "3016:3000"
     volumes: 
       - ./itbookstore:/opt/app
       - gem_cache_itbookstore:/gems
@@ -26,7 +26,7 @@ services:
         GROUP_ID: "${GROUP_ID:-1000}"
     command: ./bin/webpack-dev-server
     ports: 
-      - "3052:3052"
+      - "4017:4017"
     volumes: 
       - ./itbookstore:/opt/app
       - gem_cache_itbookstore:/gems
